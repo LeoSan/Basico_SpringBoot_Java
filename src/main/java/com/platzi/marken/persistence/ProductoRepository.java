@@ -5,6 +5,7 @@ import com.platzi.marken.domain.repository.ProductRepository;
 import com.platzi.marken.persistence.crud.ProductoCrudRepository;
 import com.platzi.marken.persistence.entity.Producto;
 import com.platzi.marken.persistence.mapper.ProductMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,9 +13,10 @@ import java.util.Optional;
 
 @Repository
 public class ProductoRepository implements ProductRepository {
-
+    @Autowired /*Esto le indica que los objetos que resiva esta notacion le das a seder el control a spring para genrar estas intacnioas,  gracias a esto no te preocupas en crear objetos manualmente */
     private ProductoCrudRepository productoCrudRepository;
 
+    @Autowired
     private ProductMapper mapper;
 
     @Override

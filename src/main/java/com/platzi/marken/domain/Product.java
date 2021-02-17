@@ -4,9 +4,9 @@ public class Product {
     private Integer productId;
     private String name;
     private int categoryId;
-    private double price;
+    private Double price;
     private int stock;
-    private boolean active;
+    private Boolean active;
     private Category category;
 
 

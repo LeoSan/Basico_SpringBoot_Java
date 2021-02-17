@@ -12,15 +12,19 @@ public class ComprasProducto {
 
     private Integer cantidad;
 
-    private Integer total;
+    private Double total;
 
-    private boolean estado;
+    private Boolean estado;
+
+
 
     @ManyToOne
     @JoinColumn(name = "id_compra", insertable = false, updatable = false)
     private Compra compra;
 
-    @OneToMany
+
+
+    @ManyToOne
     @JoinColumn(name = "id_producto", insertable = false, updatable = false)
     private Producto producto;
 
@@ -34,7 +38,7 @@ public class ComprasProducto {
         return cantidad;
     }
 
-    public Integer getTotal() {
+    public Double getTotal() {
         return total;
     }
 
@@ -53,7 +57,7 @@ public class ComprasProducto {
         this.cantidad = cantidad;
     }
 
-    public void setTotal(Integer total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
 
@@ -61,10 +65,21 @@ public class ComprasProducto {
         this.estado = estado;
     }
 
+    public Compra getCompra() {
+        return compra;
+    }
 
+    public Producto getProducto() {
+        return producto;
+    }
 
+    public void setCompra(Compra compra) {
+        this.compra = compra;
+    }
 
-
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
 
 
 }

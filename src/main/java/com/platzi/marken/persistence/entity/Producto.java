@@ -3,7 +3,7 @@ package com.platzi.marken.persistence.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "categorias")
+@Table(name = "productos")
 public class Producto {
 
     @Id
@@ -28,6 +28,8 @@ public class Producto {
 
     @Column(name = "estado")
     private Boolean estado;
+
+
 
     @ManyToOne
     @JoinColumn( name ="id_categoria", insertable = false, updatable = false)
@@ -94,4 +96,11 @@ public class Producto {
     }
 
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
 }

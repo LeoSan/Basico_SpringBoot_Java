@@ -15,7 +15,7 @@ public interface CategoryMapper {
             /*                  Fuente(sourse) es la Id de la tabla categoria  */
             /*                  Etiqueta (Target) la Id de la clase Domain categoria  */
             @Mapping(source = "idCategoria", target = "categoryId"),
-            @Mapping(source = "descripcion", target = "descripcion"),
+            @Mapping(source = "descripcion", target = "category"),
             @Mapping(source = "estado"     , target = "active"),
 
     })
@@ -27,7 +27,7 @@ public interface CategoryMapper {
      */
 
     @InheritInverseConfiguration
-    @Mapping(target="productos", ignore = true)
+    @Mapping(target = "productos", ignore = true)
     Categoria toCategoria(Category category);
 
 

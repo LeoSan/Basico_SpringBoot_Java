@@ -21,6 +21,7 @@ public class CompraProductoPK implements Serializable {
     public Integer getIdProducto() {
         return idProducto;
     }
+
     /*Setter*/
     public void setIdCompra(Integer idCompra) {
         this.idCompra = idCompra;

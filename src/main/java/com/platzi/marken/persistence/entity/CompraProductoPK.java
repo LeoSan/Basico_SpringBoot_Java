@@ -13,18 +13,16 @@ public class CompraProductoPK implements Serializable {
     @Column(name = "id_producto")
     private Integer idProducto;
 
-    /*Getter*/
     public Integer getIdCompra() {
         return idCompra;
     }
 
-    public Integer getIdProducto() {
-        return idProducto;
-    }
-
-    /*Setter*/
     public void setIdCompra(Integer idCompra) {
         this.idCompra = idCompra;
+    }
+
+    public Integer getIdProducto() {
+        return idProducto;
     }
 
     public void setIdProducto(Integer idProducto) {

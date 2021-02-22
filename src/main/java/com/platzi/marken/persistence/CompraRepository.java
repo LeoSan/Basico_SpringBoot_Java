@@ -20,25 +20,21 @@ public class CompraRepository implements PurchaseRepository {
     @Autowired
     private PurchaseMapper mapper;
 
-
     @Override
     public List<Purchase> getAll() {
-        return mapper.toPurchases( (List<Compra>)compraCrudRepository.findAll());
+        return mapper.toPurchases((List<Compra>) compraCrudRepository.findAll());
     }
 
     @Override
-    public Optional<List<Purchase>> getByClient(String clienteId) {
-
-        //compras -> Esto se llama funcion landa
-        return compraCrudRepository.findByIdCliente(clienteId).map(compras -> mapper.toPurchases(compras));
+    public Optional<List<Purchase>> getByClient(String clientId) {
+        return compraCrudRepository.findByIdCliente(clientId)
+                .map(compras -> mapper.toPurchases(compras));
     }
 
     @Override
     public Purchase save(Purchase purchase) {
         Compra compra = mapper.toCompra(purchase);
-
-        //Validar la informaci{on en cascada tenemos que estar seguro que compra conoce los productos esto viene de la realacion entre las tablas
-        compra.getProductos().forEach(producto -> producto.setCompra(compra) );
+        compra.getProductos().forEach(producto -> producto.setCompra(compra));
 
         return mapper.toPurchase(compraCrudRepository.save(compra));
     }

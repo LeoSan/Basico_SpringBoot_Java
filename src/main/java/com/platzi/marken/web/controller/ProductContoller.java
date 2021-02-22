@@ -3,6 +3,11 @@ package com.platzi.marken.web.controller;
 import com.platzi.marken.domain.Product;
 import com.platzi.marken.domain.service.ProductService;
 import com.platzi.marken.persistence.entity.Producto;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import org.aspectj.bridge.IMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,20 +24,32 @@ public class ProductContoller {
     private ProductService productService;
 
     @GetMapping("/all")
+    @ApiOperation("Get All supermarket product")
+    @ApiResponse(code= 200, message = "OK")
     public ResponseEntity<List<Product>> getAll(){
         return new ResponseEntity<>(productService.getAll(), HttpStatus.OK);
 
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProduct(@PathVariable("id") int productId){
+    @ApiOperation("Search a product with an Id ")
+    @ApiResponses({
+            @ApiResponse(code=200, message="OK"),
+            @ApiResponse(code=404, message="Product no found"),
+    })
+    public ResponseEntity<Product> getProduct(@ApiParam(value ="The Id Product ", required = true, example = "7")   @PathVariable("id") int productId){
         return productService.getProduct(productId)
                 .map(prods -> new ResponseEntity<>(prods, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/category/{catid}")
-    public ResponseEntity<List<Product>>  getByCategory(@PathVariable("catid") int categoryId){
+    @ApiOperation("Busca productos por Id categoria ")
+    @ApiResponses({
+            @ApiResponse(code=200, message="OK"),
+            @ApiResponse(code=404, message="Producto no encontrado"),
+    })
+    public ResponseEntity<List<Product>>  getByCategory( @ApiParam(value ="Id de la categoria ", required = true, example = "1") @PathVariable("catid") int categoryId){
         return productService.getByCategory(categoryId)
                 .map(prods -> new ResponseEntity<>(prods, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -40,13 +57,23 @@ public class ProductContoller {
     }
 
     @PostMapping("/save")
+    @ApiOperation("Guarda un producto nuevo en el catalago ")
+    @ApiResponses({
+            @ApiResponse(code=201, message="Producto Creado"),
+            @ApiResponse(code=404, message="Fallo"),
+    })
     public ResponseEntity<Product> save(@RequestBody  Product product){
         return new ResponseEntity<>(productService.save(product), HttpStatus.CREATED);
 
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity delete(@PathVariable("id") int productId){
+    @ApiOperation("Elimina un producto del catalogo ")
+    @ApiResponses({
+            @ApiResponse(code=200, message="OK"),
+            @ApiResponse(code=404, message="Producto no encontrado"),
+    })
+    public ResponseEntity delete(@ApiParam(value ="Id del producto que se desea eliminar ", required = true) @PathVariable("id") int productId){
         if ( productService.delete(productId) ){
           return  new ResponseEntity(HttpStatus.OK);
         }else{

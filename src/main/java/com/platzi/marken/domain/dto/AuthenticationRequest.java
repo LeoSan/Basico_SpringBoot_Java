@@ -1,6 +1,6 @@
 package com.platzi.marken.domain.dto;
 
-public class AutenticationRequest {
+public class AuthenticationRequest {
     private String username;
     private String password;
 

@@ -23,6 +23,7 @@ public class SwaggerConfig {
 
     }
 
+    //Podemos especificar la documentacion del Swagger
     private ApiInfo apiEndoPointInfo(){
         return new ApiInfoBuilder().title("Api de Productos")
                 .description("Servicios para la consulta de productos de un supermercado")
